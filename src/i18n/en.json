@@ -1,0 +1,79 @@
+{
+  "app": {
+    "title": "NoiseMap Aklima",
+    "subtitle": "Acoustic calculator for outdoor HVAC units"
+  },
+  "search": {
+    "placeholder": "Search address…",
+    "noResults": "No results"
+  },
+  "sidebar": {
+    "sources": "Noise sources",
+    "buildings": "Buildings",
+    "barriers": "Barriers",
+    "receivers": "Receivers",
+    "norms": "Regulations",
+    "results": "Results",
+    "addSource": "Add source",
+    "addBarrier": "Add barrier",
+    "loadBuildings": "Reload buildings",
+    "generatePdf": "Generate PDF",
+    "generateReceivers": "Generate receivers",
+    "recalculate": "Recalculate",
+    "empty": "No items yet"
+  },
+  "source": {
+    "model": "Equipment model",
+    "mounting": "Mounting",
+    "mounting.free": "Free (Q=2, +3 dB)",
+    "mounting.wall": "Against a wall (Q=4, +6 dB)",
+    "mounting.corner": "In a corner (Q=8, +9 dB)",
+    "height": "Mounting height (m)",
+    "count": "Number of identical units",
+    "mode": "Operating mode",
+    "mode.day": "Day",
+    "mode.night": "Night",
+    "mode.both": "Day & night",
+    "save": "Save",
+    "cancel": "Cancel",
+    "title.add": "Add noise source",
+    "title.edit": "Edit noise source"
+  },
+  "results": {
+    "receiver": "Receiver",
+    "building": "Building",
+    "distance": "Distance",
+    "day": "dBA day",
+    "night": "dBA night",
+    "dayLimit": "Day limit",
+    "nightLimit": "Night limit",
+    "status": "Status",
+    "ok": "OK",
+    "warn": "Warning",
+    "fail": "Over limit",
+    "worst": "Worst receiver",
+    "empty": "No results — add a source"
+  },
+  "country": {
+    "PL": "Poland",
+    "UA": "Ukraine"
+  },
+  "language": {
+    "uk": "UA",
+    "pl": "PL",
+    "en": "EN"
+  },
+  "map": {
+    "menu.source": "Add source here",
+    "menu.receiver": "Add receiver here",
+    "menu.building": "Draw building",
+    "legend": "Noise (dBA)"
+  },
+  "pdf": {
+    "title": "NoiseMap Aklima — Acoustic Report",
+    "generated": "Generated",
+    "inputs": "Input data",
+    "results": "Calculation results",
+    "disclaimer": "Calculated per ISO 9613-2. Expected uncertainty ±3 dB. © Aklima"
+  }
+}

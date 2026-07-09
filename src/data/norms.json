@@ -1,0 +1,20 @@
+[
+  {
+    "country": "PL",
+    "areaType": "residential",
+    "dayLimit": 50,
+    "nightLimit": 40
+  },
+  {
+    "country": "PL",
+    "areaType": "estate",
+    "dayLimit": 55,
+    "nightLimit": 45
+  },
+  {
+    "country": "UA",
+    "areaType": "residential",
+    "dayLimit": 55,
+    "nightLimit": 45
+  }
+]

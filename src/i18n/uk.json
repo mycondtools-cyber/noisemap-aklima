@@ -1,0 +1,79 @@
+{
+  "app": {
+    "title": "NoiseMap Aklima",
+    "subtitle": "Акустичний калькулятор зовнішніх блоків HVAC"
+  },
+  "search": {
+    "placeholder": "Пошук адреси…",
+    "noResults": "Немає результатів"
+  },
+  "sidebar": {
+    "sources": "Джерела шуму",
+    "buildings": "Будівлі",
+    "barriers": "Екрани",
+    "receivers": "Приймачі",
+    "norms": "Нормативи",
+    "results": "Результати",
+    "addSource": "Додати джерело",
+    "addBarrier": "Додати екран",
+    "loadBuildings": "Оновити будівлі",
+    "generatePdf": "Створити PDF",
+    "generateReceivers": "Згенерувати приймачі",
+    "recalculate": "Перерахувати",
+    "empty": "Немає елементів"
+  },
+  "source": {
+    "model": "Модель обладнання",
+    "mounting": "Монтаж",
+    "mounting.free": "Вільно (Q=2, +3 дБ)",
+    "mounting.wall": "Біля стіни (Q=4, +6 дБ)",
+    "mounting.corner": "У куті (Q=8, +9 дБ)",
+    "height": "Висота монтажу (м)",
+    "count": "Кількість однакових блоків",
+    "mode": "Режим",
+    "mode.day": "День",
+    "mode.night": "Ніч",
+    "mode.both": "День і ніч",
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "title.add": "Додати джерело шуму",
+    "title.edit": "Редагувати джерело шуму"
+  },
+  "results": {
+    "receiver": "Приймач",
+    "building": "Будівля",
+    "distance": "Відстань",
+    "day": "дБА день",
+    "night": "дБА ніч",
+    "dayLimit": "Норма день",
+    "nightLimit": "Норма ніч",
+    "status": "Статус",
+    "ok": "OK",
+    "warn": "Увага",
+    "fail": "Перевищення",
+    "worst": "Найгірший приймач",
+    "empty": "Немає результатів — додайте джерело"
+  },
+  "country": {
+    "PL": "Польща",
+    "UA": "Україна"
+  },
+  "language": {
+    "uk": "UA",
+    "pl": "PL",
+    "en": "EN"
+  },
+  "map": {
+    "menu.source": "Додати джерело тут",
+    "menu.receiver": "Додати приймач тут",
+    "menu.building": "Намалювати будівлю",
+    "legend": "Шум (дБА)"
+  },
+  "pdf": {
+    "title": "NoiseMap Aklima — Акустичний звіт",
+    "generated": "Створено",
+    "inputs": "Вхідні дані",
+    "results": "Результати розрахунку",
+    "disclaimer": "Розраховано за ISO 9613-2. Очікувана похибка ±3 дБ. © Aklima"
+  }
+}

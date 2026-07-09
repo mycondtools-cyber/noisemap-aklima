@@ -1,0 +1,79 @@
+{
+  "app": {
+    "title": "NoiseMap Aklima",
+    "subtitle": "Kalkulator akustyczny dla zewnętrznych jednostek HVAC"
+  },
+  "search": {
+    "placeholder": "Wyszukaj adres…",
+    "noResults": "Brak wyników"
+  },
+  "sidebar": {
+    "sources": "Źródła hałasu",
+    "buildings": "Budynki",
+    "barriers": "Ekrany",
+    "receivers": "Punkty odbioru",
+    "norms": "Normy",
+    "results": "Wyniki",
+    "addSource": "Dodaj źródło",
+    "addBarrier": "Dodaj ekran",
+    "loadBuildings": "Odśwież budynki",
+    "generatePdf": "Wygeneruj PDF",
+    "generateReceivers": "Generuj punkty odbioru",
+    "recalculate": "Przelicz",
+    "empty": "Brak pozycji"
+  },
+  "source": {
+    "model": "Model urządzenia",
+    "mounting": "Montaż",
+    "mounting.free": "Wolno stojący (Q=2, +3 dB)",
+    "mounting.wall": "Przy ścianie (Q=4, +6 dB)",
+    "mounting.corner": "W narożniku (Q=8, +9 dB)",
+    "height": "Wysokość montażu (m)",
+    "count": "Liczba identycznych jednostek",
+    "mode": "Tryb pracy",
+    "mode.day": "Dzień",
+    "mode.night": "Noc",
+    "mode.both": "Dzień i noc",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "title.add": "Dodaj źródło hałasu",
+    "title.edit": "Edytuj źródło hałasu"
+  },
+  "results": {
+    "receiver": "Punkt odbioru",
+    "building": "Budynek",
+    "distance": "Odległość",
+    "day": "dBA dzień",
+    "night": "dBA noc",
+    "dayLimit": "Norma dzień",
+    "nightLimit": "Norma noc",
+    "status": "Status",
+    "ok": "OK",
+    "warn": "Ostrzeżenie",
+    "fail": "Przekroczenie",
+    "worst": "Najgorszy punkt",
+    "empty": "Brak wyników — dodaj źródło"
+  },
+  "country": {
+    "PL": "Polska",
+    "UA": "Ukraina"
+  },
+  "language": {
+    "uk": "UA",
+    "pl": "PL",
+    "en": "EN"
+  },
+  "map": {
+    "menu.source": "Dodaj źródło tutaj",
+    "menu.receiver": "Dodaj punkt odbioru tutaj",
+    "menu.building": "Rysuj budynek",
+    "legend": "Hałas (dBA)"
+  },
+  "pdf": {
+    "title": "NoiseMap Aklima — Raport akustyczny",
+    "generated": "Wygenerowano",
+    "inputs": "Dane wejściowe",
+    "results": "Wyniki obliczeń",
+    "disclaimer": "Obliczono wg ISO 9613-2. Oczekiwana niepewność ±3 dB. © Aklima"
+  }
+}

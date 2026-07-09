@@ -1,0 +1,40 @@
+[
+  {
+    "id": "mycond-myheat-8",
+    "brand": "Mycond",
+    "model": "MyHeat 8",
+    "category": "heat-pump",
+    "lwA": 60,
+    "octaveLw": [45, 52, 57, 58, 56, 53, 49, 44],
+    "nightLwA": 56,
+    "notes": "Air-to-water heat pump, 8 kW class."
+  },
+  {
+    "id": "mycond-vrf-outdoor",
+    "brand": "Mycond",
+    "model": "VRF Outdoor",
+    "category": "vrf",
+    "lwA": 65,
+    "octaveLw": [50, 57, 62, 63, 61, 58, 54, 49],
+    "nightLwA": 62,
+    "notes": "VRF outdoor unit, medium size."
+  },
+  {
+    "id": "generic-inverter-split-35",
+    "brand": "Generic",
+    "model": "Inverter Split 3.5 kW",
+    "category": "split",
+    "lwA": 58,
+    "octaveLw": [43, 50, 55, 56, 54, 51, 47, 42],
+    "notes": "Typical residential split system outdoor unit."
+  },
+  {
+    "id": "generic-chiller-20",
+    "brand": "Generic",
+    "model": "Chiller 20 kW",
+    "category": "chiller",
+    "lwA": 72,
+    "octaveLw": [57, 64, 69, 70, 68, 65, 61, 56],
+    "notes": "Small commercial air-cooled chiller."
+  }
+]
