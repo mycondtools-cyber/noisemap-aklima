@@ -98,6 +98,7 @@ export function MapView({
     map.on('click', () => setMenu(null));
 
     map.on('load', () => {
+      setTimeout(() => map.resize(), 0);
       map.addSource('buildings', {
         type: 'geojson',
         data: { type: 'FeatureCollection', features: [] },
