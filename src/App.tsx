@@ -21,6 +21,7 @@ import type {
   Barrier,
   Building,
   Language,
+  MountingType,
   Source,
 } from './engine/types';
 import type {
@@ -78,7 +79,7 @@ export default function App() {
   const overpassTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [dialogState, setDialogState] = useState<
     | { open: false }
-    | { open: true; kind: 'add'; lat: number; lng: number }
+    | { open: true; kind: 'add'; lat: number; lng: number; defaultHs?: number; defaultMounting?: MountingType }
     | { open: true; kind: 'edit'; sourceId: string }
   >({ open: false });
 
@@ -223,6 +224,9 @@ export default function App() {
   const handleSelectSource = useCallback((id: string) => {
     setDialogState({ open: true, kind: 'edit', sourceId: id });
   }, []);
+  const handleAddRooftopSource = useCallback((lat: number, lng: number) => {
+    setDialogState({ open: true, kind: 'add', lat, lng, defaultHs: 10, defaultMounting: 'free' });
+  }, []);
 
   const editing: Source | undefined = useMemo(() => {
     if (dialogState.open && dialogState.kind === 'edit') {
@@ -292,6 +296,7 @@ export default function App() {
           onAddReceiver={handleAddReceiver}
           onDrawBuilding={handleAddBuilding}
           onSelectSource={handleSelectSource}
+          onAddRooftopSource={handleAddRooftopSource}
         />
         <Sidebar
           onAddSource={() =>
@@ -312,6 +317,8 @@ export default function App() {
           initial={editing}
           lat={dialogState.kind === 'add' ? dialogState.lat : undefined}
           lng={dialogState.kind === 'add' ? dialogState.lng : undefined}
+          defaultHs={dialogState.open && dialogState.kind === 'add' ? dialogState.defaultHs : undefined}
+          defaultMounting={dialogState.open && dialogState.kind === 'add' ? dialogState.defaultMounting : undefined}
           onClose={() => setDialogState({ open: false })}
         />
       ) : null}

@@ -31,9 +31,24 @@ interface MapProps {
   onAddReceiver: (lat: number, lng: number) => void;
   onDrawBuilding: (lat: number, lng: number) => void;
   onSelectSource: (id: string) => void;
+  onAddRooftopSource: (lat: number, lng: number) => void;
 }
 
 const OPENFREEMAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
+
+const SATELLITE_STYLE = {
+  version: 8 as const,
+  glyphs: 'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
+  sources: {
+    'esri-sat': {
+      type: 'raster' as const,
+      tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+      tileSize: 256,
+      attribution: '© Esri, Maxar, Earthstar Geographics',
+    },
+  },
+  layers: [{ id: 'satellite-base', type: 'raster' as const, source: 'esri-sat' }],
+};
 
 function toGeoJsonPolygon(building: {
   polygon: [number, number][];
@@ -60,15 +75,116 @@ function toGeoJsonPolygon(building: {
   };
 }
 
+function setupLayers(map: MLMap) {
+  setTimeout(() => map.resize(), 0);
+  map.addSource('buildings', {
+    type: 'geojson',
+    data: { type: 'FeatureCollection', features: [] },
+  });
+  map.addLayer({
+    id: 'buildings-3d',
+    type: 'fill-extrusion',
+    source: 'buildings',
+    paint: {
+      'fill-extrusion-color': [
+        'case',
+        ['==', ['get', 'protected'], 1],
+        '#4fc3f7',
+        '#b0bec5',
+      ],
+      'fill-extrusion-height': ['get', 'height'],
+      'fill-extrusion-opacity': 0.6,
+    },
+  });
+
+  map.addSource('sources', {
+    type: 'geojson',
+    data: { type: 'FeatureCollection', features: [] },
+  });
+  map.addLayer({
+    id: 'sources-pt',
+    type: 'circle',
+    source: 'sources',
+    paint: {
+      'circle-radius': 8,
+      'circle-color': '#e53935',
+      'circle-stroke-color': '#fff',
+      'circle-stroke-width': 2,
+    },
+  });
+
+  map.addSource('receivers', {
+    type: 'geojson',
+    data: { type: 'FeatureCollection', features: [] },
+  });
+  map.addLayer({
+    id: 'receivers-pt',
+    type: 'circle',
+    source: 'receivers',
+    paint: {
+      'circle-radius': 5,
+      'circle-color': ['get', 'color'],
+      'circle-stroke-color': '#fff',
+      'circle-stroke-width': 1,
+    },
+  });
+
+  map.addSource('barriers', {
+    type: 'geojson',
+    data: { type: 'FeatureCollection', features: [] },
+  });
+  map.addLayer({
+    id: 'barriers-line',
+    type: 'line',
+    source: 'barriers',
+    paint: {
+      'line-color': '#6a1b9a',
+      'line-width': 4,
+    },
+  });
+
+  map.addSource('isolines', {
+    type: 'geojson',
+    data: { type: 'FeatureCollection', features: [] },
+  });
+  map.addLayer({
+    id: 'isolines-line',
+    type: 'line',
+    source: 'isolines',
+    paint: {
+      'line-color': [
+        'step',
+        ['get', 'LpA'],
+        '#2e7d32',
+        40,
+        '#558b2f',
+        45,
+        '#9e9d24',
+        50,
+        '#f9a825',
+        55,
+        '#ef6c00',
+        60,
+        '#c62828',
+      ],
+      'line-width': 1.5,
+    },
+  });
+}
+
 export function MapView({
   onAddSource,
   onAddReceiver,
   onDrawBuilding,
   onSelectSource,
+  onAddRooftopSource,
 }: MapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MLMap | null>(null);
   const [menu, setMenu] = useState<ContextMenuState | null>(null);
+  const [isSatellite, setIsSatellite] = useState(false);
+  const [styleVersion, setStyleVersion] = useState(0);
+  const satStyleRef = useRef(false);
   const { t } = useTranslation();
 
   const project = useStore((s) => s.project);
@@ -98,101 +214,7 @@ export function MapView({
     map.on('click', () => setMenu(null));
 
     map.on('load', () => {
-      setTimeout(() => map.resize(), 0);
-      map.addSource('buildings', {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features: [] },
-      });
-      map.addLayer({
-        id: 'buildings-3d',
-        type: 'fill-extrusion',
-        source: 'buildings',
-        paint: {
-          'fill-extrusion-color': [
-            'case',
-            ['==', ['get', 'protected'], 1],
-            '#4fc3f7',
-            '#b0bec5',
-          ],
-          'fill-extrusion-height': ['get', 'height'],
-          'fill-extrusion-opacity': 0.6,
-        },
-      });
-
-      map.addSource('sources', {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features: [] },
-      });
-      map.addLayer({
-        id: 'sources-pt',
-        type: 'circle',
-        source: 'sources',
-        paint: {
-          'circle-radius': 8,
-          'circle-color': '#e53935',
-          'circle-stroke-color': '#fff',
-          'circle-stroke-width': 2,
-        },
-      });
-
-      map.addSource('receivers', {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features: [] },
-      });
-      map.addLayer({
-        id: 'receivers-pt',
-        type: 'circle',
-        source: 'receivers',
-        paint: {
-          'circle-radius': 5,
-          'circle-color': ['get', 'color'],
-          'circle-stroke-color': '#fff',
-          'circle-stroke-width': 1,
-        },
-      });
-
-      map.addSource('barriers', {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features: [] },
-      });
-      map.addLayer({
-        id: 'barriers-line',
-        type: 'line',
-        source: 'barriers',
-        paint: {
-          'line-color': '#6a1b9a',
-          'line-width': 4,
-        },
-      });
-
-      map.addSource('isolines', {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features: [] },
-      });
-      map.addLayer({
-        id: 'isolines-line',
-        type: 'line',
-        source: 'isolines',
-        paint: {
-          'line-color': [
-            'step',
-            ['get', 'LpA'],
-            '#2e7d32',
-            40,
-            '#558b2f',
-            45,
-            '#9e9d24',
-            50,
-            '#f9a825',
-            55,
-            '#ef6c00',
-            60,
-            '#c62828',
-          ],
-          'line-width': 1.5,
-        },
-      });
-
+      setupLayers(map);
       map.on('click', 'sources-pt', (e) => {
         const id = e.features?.[0]?.id;
         if (typeof id === 'string') onSelectSource(id);
@@ -206,6 +228,23 @@ export function MapView({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // -------- satellite toggle --------
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !map.isStyleLoaded()) return;
+    satStyleRef.current = isSatellite;
+    map.setStyle(isSatellite ? SATELLITE_STYLE : OPENFREEMAP_STYLE);
+    map.once('style.load', () => {
+      setupLayers(map);
+      map.on('click', 'sources-pt', (e) => {
+        const id = e.features?.[0]?.id;
+        if (typeof id === 'string') onSelectSource(id);
+      });
+      setStyleVersion((v) => v + 1);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSatellite]);
 
   // -------- render data --------
   useEffect(() => {
@@ -287,7 +326,7 @@ export function MapView({
     (map.getSource('barriers') as maplibregl.GeoJSONSource | undefined)?.setData(
       barriersFC,
     );
-  }, [project, equipment]);
+  }, [project, equipment, styleVersion]);
 
   // -------- isolines --------
   useEffect(() => {
@@ -303,7 +342,7 @@ export function MapView({
     }
     const iso: FeatureCollection<MultiLineString> = generateIsolines(grid);
     src.setData(iso);
-  }, [grid]);
+  }, [grid, styleVersion]);
 
   // -------- recenter when project center changes --------
   useEffect(() => {
@@ -315,6 +354,13 @@ export function MapView({
   return (
     <div className="map-wrap">
       <div ref={containerRef} className="map-canvas" />
+      <button
+        type="button"
+        className={`satellite-btn ${isSatellite ? 'active' : ''}`}
+        onClick={() => setIsSatellite(v => !v)}
+      >
+        {isSatellite ? '🗺' : '🛰'}
+      </button>
       {menu ? (
         <div
           className="ctx-menu"
@@ -347,6 +393,15 @@ export function MapView({
             }}
           >
             {t('map.menu.building')}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              onAddRooftopSource(menu.lat, menu.lng);
+              setMenu(null);
+            }}
+          >
+            {t('map.menu.rooftop')}
           </button>
         </div>
       ) : null}

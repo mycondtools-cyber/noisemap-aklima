@@ -25,7 +25,7 @@
   "source": {
     "model": "Модель обладнання",
     "mounting": "Монтаж",
-    "mounting.free": "Вільно (Q=2, +3 дБ)",
+    "mounting.free": "Вільно – земля / покрівля (Q=2, +3 дБ)",
     "mounting.wall": "Біля стіни (Q=4, +6 дБ)",
     "mounting.corner": "У куті (Q=8, +9 дБ)",
     "height": "Висота монтажу (м)",
@@ -67,6 +67,7 @@
     "menu.source": "Додати джерело тут",
     "menu.receiver": "Додати приймач тут",
     "menu.building": "Намалювати будівлю",
+    "menu.rooftop": "Джерело на покрівлі",
     "legend": "Шум (дБА)"
   },
   "pdf": {

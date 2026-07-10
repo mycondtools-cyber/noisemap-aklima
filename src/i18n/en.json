@@ -25,7 +25,7 @@
   "source": {
     "model": "Equipment model",
     "mounting": "Mounting",
-    "mounting.free": "Free (Q=2, +3 dB)",
+    "mounting.free": "Free – ground / rooftop (Q=2, +3 dB)",
     "mounting.wall": "Against a wall (Q=4, +6 dB)",
     "mounting.corner": "In a corner (Q=8, +9 dB)",
     "height": "Mounting height (m)",
@@ -67,6 +67,7 @@
     "menu.source": "Add source here",
     "menu.receiver": "Add receiver here",
     "menu.building": "Draw building",
+    "menu.rooftop": "Add rooftop source",
     "legend": "Noise (dBA)"
   },
   "pdf": {

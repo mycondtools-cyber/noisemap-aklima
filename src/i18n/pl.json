@@ -25,7 +25,7 @@
   "source": {
     "model": "Model urządzenia",
     "mounting": "Montaż",
-    "mounting.free": "Wolno stojący (Q=2, +3 dB)",
+    "mounting.free": "Swobodny – grunt / dach (Q=2, +3 dB)",
     "mounting.wall": "Przy ścianie (Q=4, +6 dB)",
     "mounting.corner": "W narożniku (Q=8, +9 dB)",
     "height": "Wysokość montażu (m)",
@@ -67,6 +67,7 @@
     "menu.source": "Dodaj źródło tutaj",
     "menu.receiver": "Dodaj punkt odbioru tutaj",
     "menu.building": "Rysuj budynek",
+    "menu.rooftop": "Źródło na dachu",
     "legend": "Hałas (dBA)"
   },
   "pdf": {

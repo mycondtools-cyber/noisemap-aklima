@@ -14,10 +14,12 @@ interface Props {
   initial?: Source;
   lat?: number;
   lng?: number;
+  defaultHs?: number;
+  defaultMounting?: MountingType;
   onClose: () => void;
 }
 
-export function SourceDialog({ initial, lat, lng, onClose }: Props) {
+export function SourceDialog({ initial, lat, lng, defaultHs, defaultMounting, onClose }: Props) {
   const { t } = useTranslation();
   const equipment = useStore((s) => s.equipment);
   const addSource = useStore((s) => s.addSource);
@@ -29,9 +31,9 @@ export function SourceDialog({ initial, lat, lng, onClose }: Props) {
     initial?.modelId ?? equipment[0]?.id ?? '',
   );
   const [mounting, setMounting] = useState<MountingType>(
-    initial?.mounting ?? 'wall',
+    initial?.mounting ?? defaultMounting ?? 'wall',
   );
-  const [hs, setHs] = useState(initial?.hs ?? 1.5);
+  const [hs, setHs] = useState(initial?.hs ?? defaultHs ?? 1.5);
   const [count, setCount] = useState(initial?.count ?? 1);
   const [mode, setMode] = useState<OperatingMode>(initial?.mode ?? 'both');
 
